@@ -39,14 +39,19 @@ public class Practice05AnimatorSetLayout extends RelativeLayout {
                 view.setTranslationX(-200f);
 
                 ObjectAnimator animator1 = ObjectAnimator.ofFloat(view, "alpha", 0, 1);
+                animator1.setDuration(1000L);
                 ObjectAnimator animator2 = ObjectAnimator.ofFloat(view, "translationX", -200, 200);
+                animator2.setDuration(1000L);
                 ObjectAnimator animator3 = ObjectAnimator.ofFloat(view, "rotation", 0, 1080);
-                animator3.setDuration(1000);
+                animator3.setDuration(1000L);
 
                 AnimatorSet animatorSet = new AnimatorSet();
                 // 用 AnimatorSet 的方法来让三个动画协作执行
                 // 要求 1： animator1 先执行，animator2 在 animator1 完成后立即开始
+                // animatorSet.playSequentially(animator1, animator2);
+
                 // 要求 2： animator2 和 animator3 同时开始
+                animatorSet.play(animator1).after(animator2).with(animator3);
 
                 animatorSet.start();
             }
